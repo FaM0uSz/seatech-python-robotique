@@ -37,7 +37,20 @@ class Cyborg(Robot, Human):
         Robot.__init__(self, name)
         Human.__init__(self, sexe)
 
-# cyborg.truc_fun()
+    def truc_fun(self):
+        print("""\
+
+                                       ._ o o
+                                       \_`-)|_
+                                    ,""       \ 
+                                  ,"  ## |   ಠ ಠ. 
+                                ," ##   ,-\__    `.
+                              ,"       /     `--._;)
+                            ,"     ## /
+                          ,"   ##    /
+
+
+                    """)
 
 if __name__ == "__main__":
     h = Human("Male")
@@ -50,3 +63,4 @@ if __name__ == "__main__":
     cyborg.eat('banana')
     cyborg.eat(['coca', 'chips'])
     cyborg.digest()
+    cyborg.truc_fun()
