@@ -24,7 +24,7 @@ class Robot():
     def power_off(self):
         self.__power = False
 
-    def battery_charger(self):
+    def charge(self):
         chargement = ""
 
         while self.__battery_level < 100:
@@ -38,8 +38,12 @@ class Robot():
     @property
     def get_vitesse(self):
         return self.__current_speed
+    
+    @property
+    def name(self):
+        return self.__name
 
-    def get_etat(self):
+    def status(self):
         print("Nom du Robot : {}".format(self.__name))
         print("Allumé ou éteint : {}".format(self.__power))
         print("Niveau de batterie : {}%".format(self.__battery_level))
@@ -58,5 +62,5 @@ class Robot():
 if __name__ == "__main__":
    r = Robot("TomleBg")
    r.power_on()
-   r.battery_charger()
-   r.get_etat()
+   r.charge()
+   r.status()
