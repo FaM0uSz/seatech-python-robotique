@@ -1,35 +1,45 @@
-from abc import ABCMeta, abstractmethod
+from abc import ABCMeta
+from abc import abstractmethod
 
-class Robot():
-    @abstractmethod  # un décorateur pour définir une méthode abstraite
-    def turn_on(self):
+class VehiculeUnmanned(metaclass=ABCMeta):
+    def __init__(self, nom):
+        self.nom = nom
+
+    @abstractmethod
+    def executer_mission(self):
         pass
 
-class Nao(Robot):
-    def turn_on(self):
-        print("J'ai reveillé mon robot NAO !")
-
-class Delta(Robot):
-    def turn_on(self):
-        print("J'ai reveillé mon robot DELTA !")
-
-class Alpha(Robot):
-    def turn_on(self):
-        print("J'ai reveillé mon robot ALPHA !")
-
-class Naya(Nao, Delta): # Fille de NAO et Delta
-    def turn_on(self):
-        return super().turn_on()
+class VehiculeGround(metaclass=ABCMeta):
+    def __init__(self, nom):
+        self.nom = nom
     
-    def hello_mom_dad():
-        print("Coucou papa maman !")
+    @abstractmethod
+    def ride(self):
+        pass
 
-if __name__ == '__main__':
+class UUV(VehiculeUnmanned):
+    def executer_mission(self):
+        print(f"Le UUV {self.nom} exécute une mission subaquatique.")
 
-    tab_robots = [Nao(), Delta(), Alpha(), Naya()]
+class UAV(VehiculeUnmanned):
+    def executer_mission(self):
+        print(f"Le UAV {self.nom} exécute une mission aérienne.")
 
-    for rob in tab_robots:
-        rob.turn_on()
+class UGV(VehiculeUnmanned,VehiculeGround):
+    def executer_mission(self):
+        print(f"Le UGV {self.nom} exécute une mission terrestre.")
 
-r = Naya
-r.hello_mom_dad()
+    def ride(self):
+        print(f"Le UGV {self.nom} roule sur terre.")
+
+# Corp principal (main)
+uuv1 = UUV("UUV-1")
+uav1 = UAV("UAV-1")
+ugv1 = UGV("UGV-1")
+
+liste_vehicules = [uuv1, uav1, ugv1]
+
+for vehicule in liste_vehicules:
+    vehicule.executer_mission()
+
+ugv1.ride()
